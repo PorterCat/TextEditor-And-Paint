@@ -1,0 +1,9 @@
+/home/portercat/Programming/QT-Lab5/build/Desktop-Debug/CMakeFiles/QT-Lab5.dir
+/home/portercat/Programming/QT-Lab5/build/Desktop-Debug/CMakeFiles/edit_cache.dir
+/home/portercat/Programming/QT-Lab5/build/Desktop-Debug/CMakeFiles/rebuild_cache.dir
+/home/portercat/Programming/QT-Lab5/build/Desktop-Debug/CMakeFiles/list_install_components.dir
+/home/portercat/Programming/QT-Lab5/build/Desktop-Debug/CMakeFiles/install.dir
+/home/portercat/Programming/QT-Lab5/build/Desktop-Debug/CMakeFiles/install/local.dir
+/home/portercat/Programming/QT-Lab5/build/Desktop-Debug/CMakeFiles/install/strip.dir
+/home/portercat/Programming/QT-Lab5/build/Desktop-Debug/CMakeFiles/QT-Lab5_autogen_timestamp_deps.dir
+/home/portercat/Programming/QT-Lab5/build/Desktop-Debug/CMakeFiles/QT-Lab5_autogen.dir
