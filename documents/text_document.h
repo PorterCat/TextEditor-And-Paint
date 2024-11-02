@@ -1,55 +1,22 @@
 #ifndef TEXT_DOCUMENT_H
 #define TEXT_DOCUMENT_H
-#include "document.h"
 #include <QTextEdit>
+#include <qobject.h>
 
-class TextDocument : public Document {
-    Q_OBJECT
+class TextDocument
+{
 
-public:
-    explicit TextDocument(QTextEdit *textEdit, QObject *parent = nullptr) : Document(parent), textEdit(textEdit) {}
+  public:
+    explicit TextDocument() = default;
 
-    void create() override {
-        textEdit->clear();
-    }
+    explicit TextDocument(QString &inputString);
 
-    void open(const QString &fileName) override {
-        QFile file(fileName);
-        if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            QTextStream in(&file);
-            textEdit->setPlainText(in.readAll());
-            file.close();
-        }
-    }
+    void load(QString &inputString);
+    void unload(QString &inputString);
+    QString &getContent();
 
-    void save(const QString &fileName) override {
-        QFile file(fileName);
-        if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-            QTextStream out(&file);
-            out << textEdit->toPlainText();
-            file.close();
-        }
-    }
-
-    void clear() override {
-        tempContent = textEdit->toPlainText();
-        textEdit->clear();
-    }
-
-    void undoClear() override {
-        textEdit->setPlainText(tempContent);
-    }
-
-    void setContent(const QString &content) override {
-        textEdit->setPlainText(content);
-    }
-
-    QString getContent() const override {
-        return textEdit->toPlainText();
-    }
-
-private:
-    QTextEdit *textEdit;
+  private:
+    QString text_;
 };
 
 #endif // TEXT_DOCUMENT_H

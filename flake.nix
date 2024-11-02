@@ -34,6 +34,7 @@
 
           buildInputs = with pkgs; [
             qtcreator
+            kdePackages.qtmultimedia
             qt6.full
             qt6.qtbase
             qt6.wrapQtAppsHook

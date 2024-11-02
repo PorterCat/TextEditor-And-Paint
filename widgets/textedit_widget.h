@@ -3,7 +3,8 @@
 
 #include <QWidget>
 
-namespace Ui {
+namespace Ui
+{
 class TextEditWidget;
 }
 
@@ -11,11 +12,11 @@ class TextEditWidget : public QWidget
 {
     Q_OBJECT
 
-public:
+  public:
     explicit TextEditWidget(QWidget *parent = nullptr);
     ~TextEditWidget();
 
-private:
+  private:
     Ui::TextEditWidget *ui;
 };
 

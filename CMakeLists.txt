@@ -18,8 +18,10 @@ set(TS_FILES QT-Lab5_ru_RU.ts)
 set(PROJECT_SOURCES
         main.cpp
         text_editor.cpp
+        documents/text_document.cpp
         text_editor.h
         text_editor.ui
+        markdown_preview_dialog.cpp
         ${TS_FILES}
 )
 
