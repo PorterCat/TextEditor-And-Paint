@@ -3,6 +3,7 @@
 #include "ui_text_editor.h"
 
 #include "markdown_preview_dialog.h"
+#include "widgets/tableedit_widget.h"
 #include <QClipboard>
 #include <QColorDialog>
 #include <QFileDialog>
@@ -39,15 +40,8 @@ void TextEditor::on_actionNew_File_triggered()
 
 void TextEditor::on_actionNew_Table_triggered()
 {
-    QTextEdit *textEdit = new QTextEdit();
-    int index = ui->tabWidget->addTab(textEdit, "Untitled");
-    ui->tabWidget->setCurrentIndex(index);
-    textEdit->append("# Table Name");
-    textEdit->append("| Syntax      | Description |");
-    textEdit->append("| ----------- | ----------- |");
-    textEdit->append("| Header      | Title       |");
-    textEdit->append("| Paragraph   | Text        |");
-    textEdits[""] = textEdit;
+    TableEditWidget *tableWidget = new TableEditWidget();
+    int index = ui->tabWidget->addTab(tableWidget, "Untitled");
 }
 
 void TextEditor::on_actionOpen_File_triggered()
