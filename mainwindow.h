@@ -1,120 +1,71 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "widgets/ieditablewidget.h"
 #include <QMainWindow>
-#include <QGraphicsScene>
-#include <QGraphicsItemGroup>
-#include <QTimer>
-#include <QFile>
-#include <QSoundEffect>
-#include "tooltype.h"
-#include "customgraphicsview.h"
+#include "enums/worktype.h"
+
+#include <QFileDialog>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui
+{
+	class MainWindow;
+}
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
-public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+  public:
+	MainWindow(QWidget *parent = nullptr);
+	~MainWindow();
 
-private slots:
-    // Слоты для текстового редактора
-    void on_actionOpen_triggered();
-    void on_actionSave_triggered();
-    void on_actionClear_triggered();
-    void on_actionReturn_triggered();
-    void on_actionChangeFont_triggered();
-    void on_actionChangeColor_triggered();
-    void on_actionSearch_triggered();
-    void on_actionReplace_triggered();
-    void on_actionCreateTable_triggered();
-    void textChanged();
+	bool isTabSelected();
 
-    // Слоты для графического редактора
-    void on_brushButton_clicked();
-    void on_eraserButton_clicked();
-    void on_addShapeButton_clicked();
-    void on_addTextButton_clicked();
-    void on_deleteShapeButton_clicked();
-    void on_changeBackgroundButton_clicked();
-    void on_saveGraphicsButton_clicked();
-    void on_clearCanvasButton_clicked();
-    void on_moveItemButton_clicked(); // Добавьте это объявление
-    void on_mergeShapesButton_clicked();
+	static IEditableWidget* parseToEditableWidget(QWidget* widget);
 
-    // Слоты для ползунков масштабирования и вращения
-    void on_scaleSlider_valueChanged(int value);
-    void on_rotateSlider_valueChanged(int value);
+  private slots:
+	void on_tabWidget_tabCloseRequested(int index);
 
-    // Слот для обновления ползунков при изменении выбора элементов на сцене
-    void on_scene_selectionChanged();
+	void on_actionOpen_triggered();
 
-    // Движение фигур
-    void startMovingItem();
-    void updateItemPosition();
-    void stopMovingItem();
+	void on_actionFind_triggered();
 
-    // Загрузка изображения
-    void on_loadImageButton_clicked(); // Добавьте это объявление
+	void on_actionNew_File_triggered();
 
-    // Слот для отключения текущего инструмента
-    void disableCurrentTool();
+	bool on_actionSave_triggered();
 
-    // Добавленные слоты
-    void onToolChanged(ToolType newTool);
-    void on_tabWidget_currentChanged(int index);
+	bool on_actionSave_as_triggered();
 
-protected:
-    void closeEvent(QCloseEvent *event) override;
+	void onFileModified(IEditableWidget* widget);
 
-private:
-    Ui::MainWindow *ui;
-    QString lastFilePath;
-    QFile tempFile;
-    bool isTempFileEmpty;
-    bool isContentModified;
+	void on_actionNew_Table_triggered();
 
-    // Переменные для графического редактора
-    QGraphicsScene *scene;
-    CustomGraphicsView *graphicsView;
-    ToolType currentTool;
-    int brushSize;
-    QColor brushColor;
-    Qt::PenStyle brushStyle;
-    int eraserSize;
-    QColor backgroundColor;
+	void closeEvent(QCloseEvent *event) override;
 
-    // Свойства фигур
-    QSize shapeSize;
-    QColor shapeFillColor;
-    QColor shapeOutlineColor;
+	bool maybeSave(IEditableWidget* widget);
+	void on_actionNew_Paint_triggered();
 
-    // Свойства текста
-    QFont textFont;
-    QColor textColor;
+	void on_actionClose_triggered();
 
-    // Для движения
-    QGraphicsItem* selectedItem;
-    QGraphicsItemGroup* selectedGroup;
-    QTimer* movementTimer;
-    int dx, dy;
-    int movementDuration;
+	void on_actionClose_All_triggered();
 
-    // Звуковой эффект для столкновений
-    QSoundEffect collisionSound;
+	void on_actionUndo_triggered();
 
-    // Функция для воспроизведения звука столкновения
-    void playCollisionSound();
+	void on_actionRedo_triggered();
 
-    void saveToTempFile();
-    void loadSettings();
-    void saveSettings();
-    void setupGraphicsView();
+	void on_actionCut_triggered();
+
+	void on_actionCopy_triggered();
+
+	void on_actionPaste_triggered();
+
+  private:
+	Ui::MainWindow *ui;
+
+	QWidget* initilizeTab(WorkType worktype);
 };
-
 #endif // MAINWINDOW_H

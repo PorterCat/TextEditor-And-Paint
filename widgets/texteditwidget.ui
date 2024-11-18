@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TextEditWidget</class>
+ <widget class="QWidget" name="TextEditWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QToolBar" name="toolBar">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>5</y>
+     <width>801</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <addaction name="actionSet_Color"/>
+   <addaction name="actionSet_Font"/>
+  </widget>
+  <widget class="QTextEdit" name="textEdit">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>781</width>
+     <height>531</height>
+    </rect>
+   </property>
+  </widget>
+  <action name="actionSet_Color">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/files/images/color-palette.png</normaloff>:/files/images/color-palette.png</iconset>
+   </property>
+   <property name="text">
+    <string>Set Color</string>
+   </property>
+   <property name="toolTip">
+    <string>Set Color</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::TextHeuristicRole</enum>
+   </property>
+  </action>
+  <action name="actionSet_Font">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/files/images/font-size.png</normaloff>:/files/images/font-size.png</iconset>
+   </property>
+   <property name="text">
+    <string>Set Font</string>
+   </property>
+   <property name="iconText">
+    <string>Set Font</string>
+   </property>
+   <property name="toolTip">
+    <string>Set Font</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::TextHeuristicRole</enum>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

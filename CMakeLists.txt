@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 
-project(QT-Lab5 VERSION 0.1 LANGUAGES CXX)
+project(TextEditor-And-Paint VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -10,57 +10,61 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
-
-set(TS_FILES QT-Lab5_ru_RU.ts)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
         main.cpp
-        text_editor.cpp
-        documents/text_document.cpp
-        text_editor.h
-        text_editor.ui
-        markdown_preview_dialog.cpp
-        ${TS_FILES}
+        mainwindow.cpp
+        mainwindow.h
+        mainwindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(QT-Lab5
+    qt_add_executable(TextEditor-And-Paint
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        widgets/tableeditwidget.h widgets/tableeditwidget.cpp widgets/tableeditwidget.ui
+
+        widgets/texteditwidget.h widgets/texteditwidget.cpp widgets/texteditwidget.ui
+        widgets/ieditablewidget.h
+        enums/worktype.h enums/worktype.cpp
+        helpers/stringhelpers.h helpers/stringhelpers.cpp
+        widgets/paintwidget.h widgets/paintwidget.cpp
+        enums/tooltype.h enums/tooltype.cpp
         resources.qrc
-
-        widgets/tableedit_widget.h widgets/tableedit_widget.cpp widgets/tableedit_widget.ui
+        widgets/sceneeditwidget.h widgets/sceneeditwidget.cpp widgets/sceneeditwidget.ui
     )
-
-    qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+# Define target properties for Android with Qt 6 as:
+#    set_property(TARGET TextEditor-And-Paint APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
+# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
-        add_library(QT-Lab5 SHARED
+        add_library(TextEditor-And-Paint SHARED
             ${PROJECT_SOURCES}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
-        add_executable(QT-Lab5
+        add_executable(TextEditor-And-Paint
             ${PROJECT_SOURCES}
-            documents/text_document.h documents/text_document.cpp
-            documents/table_document.h documents/table_document.cpp
-            resources.qrc
-            widgets/textedit_widget.h widgets/textedit_widget.cpp widgets/textedit_widget.ui
         )
     endif()
-
-    qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
 
-target_link_libraries(QT-Lab5 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(TextEditor-And-Paint PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
+find_package(Qt6 REQUIRED COMPONENTS Multimedia)
+target_link_libraries(TextEditor-And-Paint PRIVATE Qt6::Multimedia)
+
+# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
+# If you are developing for iOS or macOS you should consider setting an
+# explicit, fixed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.QT-Lab5)
+  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.TextEditor-And-Paint)
 endif()
-set_target_properties(QT-Lab5 PROPERTIES
+set_target_properties(TextEditor-And-Paint PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -69,12 +73,12 @@ set_target_properties(QT-Lab5 PROPERTIES
 )
 
 include(GNUInstallDirs)
-install(TARGETS QT-Lab5
+install(TARGETS TextEditor-And-Paint
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(QT-Lab5)
+    qt_finalize_executable(TextEditor-And-Paint)
 endif()

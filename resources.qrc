@@ -21,5 +21,13 @@
         <file>images/underline-256.png</file>
         <file>images/undo-64.png</file>
         <file>images/clipboard_64.png</file>
+        <file>images/color-palette.png</file>
+        <file>images/brush.png</file>
+        <file>images/eraser.png</file>
+        <file>images/font-size.png</file>
+        <file>images/direct-selection.png</file>
+    </qresource>
+    <qresource prefix="/sounds">
+        <file>sounds/collision.wav</file>
     </qresource>
 </RCC>
