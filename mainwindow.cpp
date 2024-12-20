@@ -123,7 +123,7 @@ bool MainWindow::on_actionSave_as_triggered()
 		switch(widget->getWorkType())
 		{
 			case WorkType::Text:
-				filePath = QFileDialog::getSaveFileName(this, tr("Save File"), widget->getFileName(), tr("Text Files (*.txt)"));
+				filePath = QFileDialog::getSaveFileName(this, tr("Save File"), widget->getFileName(), tr("Text Files (*.html)"));
 				break;
 			case WorkType::Table:
 				filePath = QFileDialog::getSaveFileName(this, tr("Save File"), widget->getFileName(), tr("Table Files (*.csv)"));

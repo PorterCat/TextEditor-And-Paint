@@ -119,6 +119,10 @@
    </property>
   </action>
   <action name="actionFind">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/files/images/search-2-64.png</normaloff>:/files/images/search-2-64.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Find</string>
    </property>
@@ -128,7 +132,7 @@
   </action>
   <action name="actionClose">
    <property name="text">
-    <string>Close</string>
+    <string>&amp;Close</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+W</string>
@@ -136,7 +140,7 @@
   </action>
   <action name="actionClose_All">
    <property name="text">
-    <string>Close All</string>
+    <string>C&amp;lose All</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+W</string>
@@ -144,7 +148,7 @@
   </action>
   <action name="actionUndo">
    <property name="text">
-    <string>Undo</string>
+    <string>&amp;Undo</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Z</string>
@@ -152,7 +156,7 @@
   </action>
   <action name="actionRedo">
    <property name="text">
-    <string>Redo</string>
+    <string>&amp;Redo</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Alt+Z</string>
@@ -160,7 +164,7 @@
   </action>
   <action name="actionCopy">
    <property name="text">
-    <string>Copy</string>
+    <string>&amp;Copy</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+C</string>
@@ -168,7 +172,7 @@
   </action>
   <action name="actionPaste">
    <property name="text">
-    <string>Paste</string>
+    <string>&amp;Paste</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+V</string>
@@ -183,6 +187,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

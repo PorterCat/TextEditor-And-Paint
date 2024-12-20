@@ -1,13 +1,23 @@
 #include "texteditwidget.h"
+#include "ui_mainwindow.h"
 #include "ui_texteditwidget.h"
 
 #include <QColorDialog>
 #include <QFontDialog>
 
+#include "../mainwindow.h"
+
 TextEditWidget::TextEditWidget(QWidget *parent)
 	: QWidget(parent), ui(new Ui::TextEditWidget)
 {
 	ui->setupUi(this);
+
+	// QAction* findRef;
+
+	// if(MainWindow *cast = qobject_cast<MainWindow*>(parent))
+	// 	findRef = cast->ui->actionFind;
+
+	// ui->toolBar->addAction(findRef);
 }
 
 TextEditWidget::~TextEditWidget() { delete ui; }
@@ -44,7 +54,7 @@ void TextEditWidget::openFile(const QString& filePath)
 
 	QTextStream in(&file);
 	originalText_ = in.readAll();
-	ui->textEdit->setPlainText(originalText_);
+	ui->textEdit->setHtml(originalText_);
 }
 
 bool TextEditWidget::saveFile(const QString& filePath)
@@ -63,7 +73,7 @@ bool TextEditWidget::saveFile(const QString& filePath)
 	}
 
 	QTextStream out(&file);
-	originalText_ = ui->textEdit->toPlainText();
+	originalText_ = ui->textEdit->toHtml();
 	out << originalText_;
 	isModified_ = false;
 	fileinfo_ = new QFileInfo(filePath);
@@ -104,6 +114,24 @@ void TextEditWidget::on_actionSet_Font_triggered()
 	bool ok;
 	QFont font = QFontDialog::getFont(&ok, ui->textEdit->font(), this);
 	if (ok)
-		ui->textEdit->setFont(font);
+	{
+		currentFont_ = font;
+		QTextCursor cursor = ui->textEdit->textCursor();
+		if (!cursor.hasSelection())
+		{
+			QTextCharFormat format;
+			format.setFont(currentFont_);
+			cursor.select(QTextCursor::Document);
+			cursor.mergeCharFormat(format);
+			ui->textEdit->mergeCurrentCharFormat(format);
+		}
+		else
+		{
+			QTextCharFormat format;
+			format.setFont(currentFont_);
+			cursor.mergeCharFormat(format);
+			ui->textEdit->mergeCurrentCharFormat(format);
+		}
+	}
 }
 

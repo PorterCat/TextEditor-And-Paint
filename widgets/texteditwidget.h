@@ -49,6 +49,7 @@ class TextEditWidget : public QWidget, public IEditableWidget
   private:
 	Ui::TextEditWidget *ui;
 	QString originalText_;
+	QFont currentFont_;
 	QFileInfo* fileinfo_ = nullptr;
 	bool isModified_ = false;
 };
