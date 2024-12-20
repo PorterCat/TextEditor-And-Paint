@@ -1,0 +1,33 @@
+<RCC>
+    <qresource prefix="/files">
+        <file>images/add-file-64.png</file>
+        <file>images/align-text-center-256.png</file>
+        <file>images/align-text-justify-256.png</file>
+        <file>images/align-text-left-256.png</file>
+        <file>images/align-text-right-256.png</file>
+        <file>images/bold-64.png</file>
+        <file>images/close.png</file>
+        <file>images/copy-64.png</file>
+        <file>images/cut-64.png</file>
+        <file>images/file-64.png</file>
+        <file>images/italic-64.png</file>
+        <file>images/load-64.png</file>
+        <file>images/redo-64.png</file>
+        <file>images/save-64.png</file>
+        <file>images/search-2-64.png</file>
+        <file>images/sort_64.png</file>
+        <file>images/strikethrough-256.png</file>
+        <file>images/table_64.png</file>
+        <file>images/underline-256.png</file>
+        <file>images/undo-64.png</file>
+        <file>images/clipboard_64.png</file>
+        <file>images/color-palette.png</file>
+        <file>images/brush.png</file>
+        <file>images/eraser.png</file>
+        <file>images/font-size.png</file>
+        <file>images/direct-selection.png</file>
+    </qresource>
+    <qresource prefix="/sounds">
+        <file>sounds/collision.wav</file>
+    </qresource>
+</RCC>
